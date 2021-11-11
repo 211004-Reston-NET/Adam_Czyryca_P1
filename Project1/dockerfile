@@ -1,0 +1,32 @@
+#First our virtual os will need the .Net sdk
+FROM mcr.microsoft.com/dotnet/sdk:5.0 as build
+
+#set working directory
+WORKDIR /app
+
+#copy prodicts to the working directory 
+COPY *.sln ./
+COPY TTGBL/*.csproj TTGBL/
+COPY TTGDL/*.csproj TTGDL/
+COPY TTGModel/*.csproj TTGModel/
+COPY TTGTest/*.csproj TTGTest/
+COPY TTGWebUI/*.csproj TTGWebUI/
+
+#need to build/restore out files (bin$obj)
+RUN cd TTGWebUI && dotnet restore
+
+#copy all sorce files
+COPY . ./
+
+#CMD /bin/bash
+
+RUN dotnet publish TTGWebUI -c Release -o publish --no-restore
+
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 as runtime
+
+WORKDIR /app
+
+COPY --from=build /app/publish ./
+
+CMD ["dotnet", "TTGWebUI.dll"]
+

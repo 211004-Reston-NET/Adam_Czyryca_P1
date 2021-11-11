@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model TTGWebUI.Models.LineItemVM
+
+
+<h1 class="display-5">Add An Inventory Item</h1>
+
+<form asp-action="Create">
+    <!--
+    <div class="mb-3">
+        <label asp-for="Store" class="form-label">Storefront ID</label>
+        <input asp-for="Store" type="text" class="form-control" />
+
+    </div>
+    -->
+    <div class="mb-3">
+        <label asp-for="Quantity" class="form-label">Quantity</label>
+        <input asp-for="Quantity" type="text" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Product" class="form-label">Product ID</label>
+        <input asp-for="Product" type="text" class="form-control" />
+    </div>
+    <input type="hidden" asp-for="Store"/>
+    <input type="submit" value="Create" class="btn btn-primary" />
+    <!--<button type="submit" class="btn btn-primary" value="Create">Submit</button>-->
+</form>
+
+
+
+
+

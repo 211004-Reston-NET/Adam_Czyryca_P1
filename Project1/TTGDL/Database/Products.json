@@ -1,0 +1,62 @@
+[
+  {
+    "Name": "DnD Wizard figurine",
+    "Price": 6,
+    "Description": "A 1 inch plastic model of a wizard",
+    "Category": null
+  },
+  {
+    "Name": "DnD Warlock figurine",
+    "Price": 6,
+    "Description": "A 1 inch plastic model of a warlock",
+    "Category": null
+  },
+  {
+    "Name": "DnD Paladin figurine",
+    "Price": 6,
+    "Description": "A 1 inch plastic model of a Paladin",
+    "Category": null
+  },
+  {
+    "Name": "gemstone dice set",
+    "Price": 6,
+    "Description": "7pc dice set made of polished gemstones",
+    "Category": null
+  },
+  {
+    "Name": "Metal dice set",
+    "Price": 6,
+    "Description": "7pc dice set made of Metal",
+    "Category": null
+  },
+  {
+    "Name": "Plastic dice set",
+    "Price": 6,
+    "Description": "7pc dice set made of plastic",
+    "Category": null
+  },
+  {
+    "Name": "WH 40K Thousand Sons Marine",
+    "Price": 6,
+    "Description": null,
+    "Category": null
+  },
+  {
+    "Name": "test",
+    "Price": 6,
+    "Description": null,
+    "Category": null
+  },
+  {
+    "Name": "test2",
+    "Price": 5.8,
+    "Description": null,
+    "Category": null
+  },
+  {
+    "Name": "testProd",
+    "Price": 7,
+    "Description": null,
+    "Category": null
+  }
+]

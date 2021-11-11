@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@* this tells you that this view will expect to retrive a list of CustomerVM *@
+@model IEnumerable<TTGWebUI.Models.CustomerVM>
+<h1>List of Customers</h1>
+
+<a class=" btn btn-primary text-white" asp-controller="Customer" asp-action="create">Add Customer</a>
+<br /> <!-- br is like\n -->
+<br />
+<table class=" table table-striped table-hover">
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Email/Phone</th>
+        <th></th>
+    </tr>
+ 
+    @foreach(CustomerVM cust in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => cust.Name)</td>
+            <td>@Html.DisplayFor(modelItem => cust.Address)</td>
+            <td>@Html.DisplayFor(modelItem => cust.EmailPhone)</td>
+            <td>
+                <!-- ActionLink("name for given element", "what action to point to in the controller", give info from view to controller, styling)-->
+                <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { p_id = cust.Id}, new {@style = "color:white;" })</button>
+            </td>
+        </tr>
+    }
+
+</table>

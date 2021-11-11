@@ -1,0 +1,38 @@
+[
+  {
+    "Name": "Millenium Games",
+    "Address": "New York",
+    "ProdList": null,
+    "OrderList": null
+  },
+  {
+    "Name": "GameVerse",
+    "Address": "arizonia",
+    "ProdList": null,
+    "OrderList": null
+  },
+  {
+    "Name": "AcquisitionsInc",
+    "Address": "DnDAve",
+    "ProdList": null,
+    "OrderList": null
+  },
+  {
+    "Name": "TableTopGames",
+    "Address": "Location",
+    "ProdList": null,
+    "OrderList": null
+  },
+  {
+    "Name": "test",
+    "Address": "debug dr",
+    "ProdList": null,
+    "OrderList": null
+  },
+  {
+    "Name": "teststore",
+    "Address": "location",
+    "ProdList": null,
+    "OrderList": null
+  }
+]
