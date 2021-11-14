@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!--
+model Tuple<IEnumerable<TTGWebUI.Models.StoreVM>, TTGWebUI.Models.OrderVM>
+-->
+@model TTGWebUI.Models.OrderVM
+
+
+<h1 class="display-5">Place Order</h1>
+
+<form asp-action="Create">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Loged In:</span>
+        </div>
+        <input class="form-control" type="text" placeholder=@SingletonCustomerVM.Customer.Name readonly>
+        <input type="hidden" asp-for="Customer" value="@SingletonCustomerVM.Customer.Id" />
+    </div>
+    <!--
+    <div class="mb-3">
+        <label asp-for="Item2.Customer" class="form-label">Customer</label>
+        <input asp-for="Item2.Customer" type="text" class="form-control" />
+    </div>
+    -->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">StoreFront</label>
+        </div>
+        <select asp-for="StoreFront" class="custom-select" id="inputGroupSelect01">
+            <option selected>Choose a Store...</option>
+            @foreach (StoreVM store in ViewBag.stores)
+            {
+
+                <option value="@store.Id">@store.Name</option>
+            }
+        </select>
+            <!---
+                <input type="hidden" asp-for="StoreFront" value=option/>
+
+    foreach (StoreVM store in Model.Item1.ToList())
+    {
+        <option value="store.Id">store.Name</option>
+    }
+    -->
+        
+    </div>
+    <!--
+    <div class="mb-3">
+        <label asp-for="StoreFront" class="form-label">StoreFront</label>
+        <input asp-for="StoreFront" type="text" class="form-control" />
+    </div>
+     -->
+    <button type="submit" class="btn btn-primary" value="Create">Submit</button>
+</form>
+
+
+
+
+

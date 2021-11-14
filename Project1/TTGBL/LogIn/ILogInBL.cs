@@ -1,4 +1,5 @@
 using System;
+using TTGModel;
 
 namespace TTGBL
 {
@@ -12,5 +13,7 @@ namespace TTGBL
         /// <param name="p_custEmailPhone"></param>
         /// <returns></returns>
         Boolean VerifyCustomerID(string p_custName, string p_custEmailPhone);
+
+        
     }
 }

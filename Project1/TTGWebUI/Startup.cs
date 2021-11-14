@@ -46,6 +46,8 @@ namespace TTGWebUI
             services.AddScoped<IItemsInOrderBL, ItemsInOrderBL>();
             services.AddScoped<IItemsInOrderRepo, ItemsInOrderCloudRepo>();
 
+            services.AddScoped<ILogInBL, LogInBL>();
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 

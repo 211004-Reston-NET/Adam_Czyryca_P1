@@ -42,7 +42,6 @@ namespace WebUI.Controllers
             List<LineItem> ListOfLineItems = _lineItemBL.GetAllLineItems(p_storeId);
             List<ProductVM> ProdList=new List<ProductVM>();
             List<LineItemVM> ItemList = new List<LineItemVM>();
-            List<int> Quantity= new List<int>();
             for (int i=0; i< ListOfLineItems.Count; i++)
             {
                 ProdList.Add(new ProductVM(_prodBL.GetProductByID(ListOfLineItems[i].Product)));
@@ -55,18 +54,19 @@ namespace WebUI.Controllers
         //-----------------------------------create------------------------------------------
         // GET: CustomerController/Create
         [HttpGet]
-        public IActionResult Create()
+        public ActionResult Create(int p_storeId)
         {
-            return View();
+            return View(new LineItemVM(){Store = p_storeId});
         }
 
         // POST: CustomerController/Create
         [HttpPost]
-        public IActionResult Create(LineItemVM LItemVM)
+        //[Route("/LineItem/Create?{p_storeId=2}")]
+        public ActionResult Create(int Id, LineItemVM LItemVM)
         {
             Product foundProd = _prodBL.GetProductByID(LItemVM.Product);
             Store foundStore = _storeBL.GetStoreById(LItemVM.Store);
-            if (foundProd != null && foundStore!= null)
+            if (foundStore!= null)
             {
                 _lineItemBL.AddLineItem(new LineItem()
                 {

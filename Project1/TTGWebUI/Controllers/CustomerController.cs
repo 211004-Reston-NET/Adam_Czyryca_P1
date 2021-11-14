@@ -13,10 +13,12 @@ namespace TTGWebUI.Controllers
     public class CustomerController : Controller
     {
         private ICustomerBL _custBL;
+        private ILogInBL _logInBL;
 
-        public CustomerController(ICustomerBL p_custBL)
+        public CustomerController(ICustomerBL p_custBL, ILogInBL p_logInBL)
         {
             _custBL = p_custBL;
+            _logInBL = p_logInBL;
         }
         //-------------------------------------index----------------------------------------
 
@@ -33,7 +35,7 @@ namespace TTGWebUI.Controllers
         }
         //---------------------------------------LogIn--------------------------------------
         [HttpGet]
-        public IActionResult LogIn()
+        public ActionResult LogIn()
         {
             return View();
         }
@@ -41,15 +43,21 @@ namespace TTGWebUI.Controllers
         [HttpPost]
         public IActionResult LogIn(CustomerVM custVM)
         {
-            List<Customer> foundCust = _custBL.GetAllCustomers();
-            foreach (Customer cust in foundCust)
+            Customer found = _custBL.GetMatchingCustomer(custVM.Name, custVM.EmailPhone);
+            if (found != null)
             {
-                if (cust.Name ==custVM.Name && cust.EmailPhone == custVM.EmailPhone)
-                {
-                    ViewData.Add("CurrentCustomer", cust);
-                    return View(new CustomerVM(cust));
-                }
+                SingletonCustomerVM.Customer = found;
+                //ViewData.Add("CurrentCustomer", custVM);
+                return RedirectToAction(nameof(Index));
             }
+            //foreach (Customer cust in foundCust)
+            //{
+            //    if (cust.Name ==custVM.Name && cust.EmailPhone == custVM.EmailPhone)
+            //    {
+            //        ViewData.Add("CurrentCustomer", cust);
+            //        return RedirectToAction(nameof(Index));
+            //    }
+            //}
             return View();
 
         }

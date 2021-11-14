@@ -49,7 +49,7 @@ namespace TTGTest
 
                 //Assert -- expected outcome of Act
                 //Equal(number of customers expected, #of customers retrevied from GetAllCustomers)
-                Assert.Equal("Tester Balthezar", test.Name);
+                Assert.Equal("Tester Balthezar", found.Name);
             }
         }
 

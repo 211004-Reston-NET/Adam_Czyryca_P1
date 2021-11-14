@@ -17,6 +17,10 @@ namespace TTGUI
         {
             List<Customer> ListOfCustomers = _custBL.GetCustomer(ShowCustomers._findCustName);
 
+            //following 2 lines added for testing 
+            Customer custId = ListOfCustomers[0];
+            Customer testCust = _custBL.GetMatchingCustomer(custId.Id);
+
             
             //Console.WriteLine(ListOfCustomers[0].ToString());
             if (ListOfCustomers.Count == 0)
@@ -32,14 +36,14 @@ namespace TTGUI
             else
             {
                 Console.WriteLine("This is the search result");
-                foreach (Customer customer in ListOfCustomers)
-                {
+                //foreach (Customer customer in ListOfCustomers)
+                //{
                     Console.WriteLine(
                         "-------------------------\n" +
-                        $"{customer}\n" +
+                        $"{testCust}\n" +//$"{customer}\n" +
                         "-------------------------\n"
                     );
-                }
+                //}
                 Console.WriteLine("[0] - Go back");
             }
         }
