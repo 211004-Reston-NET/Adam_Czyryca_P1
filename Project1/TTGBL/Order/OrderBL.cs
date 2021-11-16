@@ -40,5 +40,10 @@ namespace TTGBL
         {
             return _orderRepo.GetAllCustomerOrders(p_cust);
         }
+
+        public void UpdateTotal(int p_orderID, int p_newTotal)
+        {
+             _orderRepo.UpdateTotal(p_orderID, p_newTotal);
+        }
     }
 }

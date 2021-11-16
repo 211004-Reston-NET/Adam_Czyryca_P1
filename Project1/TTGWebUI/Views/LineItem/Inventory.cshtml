@@ -41,17 +41,4 @@
     </tr>
      }
 
-    @*@foreach (ProductVM prod in Model.Item1.ToList())
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelitem => prod.Name)</td>
-            <td>@Html.DisplayFor(modelitem => prod.Price)</td>   
-            <td>@Html.DisplayFor(modelitem => Model.Item2.ToList()
-                                .Where(item => item.Product == prod.Id)
-                                .Select(item => item.Quantity))
-            </td>
-            <td>@Html.DisplayFor(modelitem => prod.Catagory)</td>
-            <td>@Html.DisplayFor(modelitem => prod.Description)</td>
-        </tr>
-    }*@
 </table>

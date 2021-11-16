@@ -21,17 +21,61 @@ namespace TTGWebUI.Controllers
             _logInBL = p_logInBL;
         }
         //-------------------------------------index----------------------------------------
+        
+        [HttpGet]
+        public ActionResult IndexById(String name)
+        {
 
+
+            //List<Customer> foundCust=_custBL.GetCustomer(name);
+            //List<CustomerVM> custVM = new List<CustomerVM>();
+            //foreach(Customer cust in foundCust)
+            //{
+            //    custVM.Add(new CustomerVM(cust));
+            //}
+
+            List<CustomerVM> custVM = new List<CustomerVM>();
+            custVM.Add(new CustomerVM()
+            {
+                Name = name,
+                Address = "location",
+                EmailPhone = "mail"
+            });
+            //List<Customer> foundCust = _custBL.GetCustomer(custVM[custVM.Count - 1].Name);
+
+            return View(custVM);
+        }
+
+
+        [HttpGet]
         // GET: CustomerController
         public ActionResult Index()
         {
             //get list of customers from BL
             //converted model customer into customerVM using select method
             //toList to change it into a list
-            return View(_custBL.GetAllCustomers()
-                .Select(cust => new CustomerVM(cust))
-                .ToList()
-            );
+            List<Customer> ListOfCust = _custBL.GetAllCustomers();
+            List<CustomerVM> custVM = new List<CustomerVM>();
+            foreach (Customer cust in ListOfCust)
+            {
+                custVM.Add(new CustomerVM(cust));
+            }
+            custVM.Add(new CustomerVM());
+
+            return View(custVM);
+            //return View(_custBL.GetAllCustomers()
+            //    .Select(cust => new CustomerVM(cust))
+            //    .ToList()
+            //);
+        }
+
+        [HttpPost]
+        public ActionResult Index(List<CustomerVM> custVM)
+        {
+            List<Customer> foundCust = _custBL.GetCustomer(custVM[custVM.Count - 1].Name);
+
+            return View(foundCust);
+
         }
         //---------------------------------------LogIn--------------------------------------
         [HttpGet]

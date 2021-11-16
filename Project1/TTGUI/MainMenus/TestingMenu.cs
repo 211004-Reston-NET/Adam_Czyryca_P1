@@ -24,6 +24,7 @@ namespace TTGUI
             "[3] - OrdersMenu\n" +
             "[4] - ProductMenu\n" +
             "[5] - LineItemMenu\n" +
+            "[6] - test\n" +
             "[0] - Exit\n" +
             "____________________________"
             );
@@ -35,6 +36,8 @@ namespace TTGUI
 
             switch (userChoice)
             {
+                case "6":
+                    return MenuType.test;
                 case "5":
                     return MenuType.LineItemMenu;
                 case "4":

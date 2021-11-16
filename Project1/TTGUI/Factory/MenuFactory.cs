@@ -104,6 +104,12 @@ namespace TTGUI
                                                new ProductBL(new ProductCloudRepo(new database1Context(options))),
                                                new CustomerBL(new CustomerCloudRepo(new database1Context(options))));
                 //---------------------------------------------------------------------------------------
+                case MenuType.test:
+                    return new test(new OrderBL(new OrderCloudRepo(new database1Context(options))),
+                                          new StoreBL(new StoreCloudRepo(new database1Context(options))),
+                                          new LineItemBL(new LineItemCloudRepo(new database1Context(options))),
+                                          new ProductBL(new ProductCloudRepo(new database1Context(options))),
+                                          new ItemsInOrderBL(new ItemsInOrderCloudRepo(new database1Context(options))));
                 default:
                     return null;
 

@@ -1,0 +1,173 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var total = new double();
+}
+@model TTGWebUI.Models.ItemInOrderVM
+
+<h1>Add to Cart</h1>
+
+<br /> <!-- br os like\n -->
+<br />
+<div class="container ">
+    <div class="row ">
+        <div class="col-6 ">
+            <table class="table table-dark w-100">
+                <tr>
+                    <th></th>
+                </tr>
+                <tr></tr>
+                <tr>
+                    @for (int i = 0; i < SingletonOrderVM.ListOfProductsVM.Count; i++)
+                    {
+                        <table class="table table-dark w-100">
+                            <form asp-action="AddToOrder">
+                                <!-----------------------------------------------------------------first line--------------------------------------------------------------------->
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Product Name:</span>
+                                        </div>
+
+                                        <input class="form-control" type="text" placeholder="@SingletonOrderVM.ListOfProductsVM.ToList()[i].Name" readonly>
+                                        <input type="hidden" asp-for=@Model.LineItemId value=@SingletonOrderVM.ListOfLineItemsVM[i].Id />
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Price per unit:</span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="$@SingletonOrderVM.ListOfProductsVM.ToList()[i].Price.ToString("F")" readonly>
+                                    </div>
+                                </div>
+                                <!-----------------------------------------------------------------second Line--------------------------------------------------------------------->
+                                <div class="form-row">
+                                    <div class="form-group col-md-8">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Description:</span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="@SingletonOrderVM.ListOfProductsVM.ToList()[i].Description" readonly >
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Category:</span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="@SingletonOrderVM.ListOfProductsVM.ToList()[i].Catagory" readonly>
+                                    </div>
+                                </div>
+                                <!-----------------------------------------------------------------third Line--------------------------------------------------------------------->
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Quantity:</span>
+                                        </div>
+                                        <select asp-for="@Model.Quantity" class="custom-select" id="inputGroupSelect01">
+                                            <option selected>Choose Quantity...</option>
+                                            @for (int j = 0; j < SingletonOrderVM.ListOfLineItemsVM.ToList()[i].Quantity; j++)
+                                            {
+
+                                                <option asp-for="@Model.Quantity" value=j+1>@(j+1)</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">In Stock:</span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="@SingletonOrderVM.ListOfLineItemsVM.ToList()[i].Quantity" readonly>
+                                    </div>
+                                </div>
+                                <!-----------------------------------------------------------------fourth Line--------------------------------------------------------------------->
+                                <input type="hidden" asp-for=@Model.OrderId value=@SingletonOrderVM.Order.Id />
+
+                                <button type="submit" class="btn btn-primary">Add</button>
+                                <table class=" table table-dark w-100">
+                                    <tr>
+                                        <th></th>
+                                    </tr>
+                                </table>
+                            </form>
+                        </table>
+                    }
+                </tr>
+            </table>
+        </div>
+        <div class="col-6 ">
+            <table class="table table-dark w-100">
+                <tr>
+                    <th></th>
+                </tr>
+
+            </table>
+            <table class=" table table-striped table-hover">
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Quantity</th>
+                    <th></th>
+                </tr>
+                @for (int j = 0; j < SingletonOrderVM.ListOfItems.Count; j++)
+                {
+                    <tr>
+                        <td class="text-center">@SingletonOrderVM.ListOfProducts[j].Name</td>
+                        <td class="text-center">$@SingletonOrderVM.ListOfProducts[j].Price.ToString("F")</td>
+                        <td class="text-center">@SingletonOrderVM.ListOfItems[j].Quantity</td>
+                    </tr>
+                 }
+                <tr>
+                    <th>Total:</th>
+                    <td>@SingletonOrderVM.Total</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@*<table class=" table table-striped table-hover">
+        <tr>
+    class="table-responsive col-md-6"
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+
+        @foreach (var item in SingletonOrderVM.ListOfItems)
+        {
+            <tr>
+                <td>@SingletonOrderVM.ListOfProductsVM[i].Name</td>
+                <td>@SingletonOrderVM.ListOfProductsVM[i].Price</td>
+                <td>@SingletonOrderVM.ListOfLineItemsVM[i].Quantity</td>
+                <td>@SingletonOrderVM.ListOfProductsVM[i].Catagory</td>
+                <td>@SingletonOrderVM.ListOfProductsVM[i].Description</td>
+                <td>
+                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { p_id = Model.Item2.ToList()[i].Id }, new { @style = "color:white;" })</button>
+                </td>
+                <td>
+                    <button class="btn btn-info">@Html.ActionLink("Modify", "Modify", new { p_id = Model.Item2.ToList()[i].Id }, new { @style = "color:white;" })</button>
+                </td>
+
+            </tr>
+        }
+
+    </table>*@
+
+
+
+
+
+
+
+

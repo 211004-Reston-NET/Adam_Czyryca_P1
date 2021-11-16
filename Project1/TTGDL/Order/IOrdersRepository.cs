@@ -25,6 +25,20 @@ namespace TTGDL
         /// <returns></returns>
         Orders GetOrder(int p_orderId);
 
+        /// <summary>
+        /// updates the total for the order with a matching Id
+        /// </summary>
+        /// <param name="p_orderID"></param>
+        /// <param name="p_newTotal"></param>
+        void UpdateTotal(int _orderID, int _newTotal);
+
+
+
+
+
+
+
+        
         int GetOrderId(Orders p_order);
 
         List<Orders> GetAllCustomerOrders(Customer _cust);

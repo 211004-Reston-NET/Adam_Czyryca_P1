@@ -29,6 +29,7 @@ namespace TTGUI
         ShowStoreInventory,
         ShowOrders,
         LogInMenu,
+        test,
         Exit
     }
 
