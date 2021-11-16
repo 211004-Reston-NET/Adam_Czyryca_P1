@@ -5,7 +5,7 @@
 
 
     Dictionary<int, OrderVM> OrderDict = (Dictionary<int, OrderVM>)ViewData["OrderDict"];
-    var orderList = OrderDict.ToList();
+    
     Dictionary<int, ItemInOrderVM> ItemDict = (Dictionary<int, ItemInOrderVM>)ViewData["ItemsInOrderDict"];
     Dictionary<int, ProductVM> ProdDict = (Dictionary<int, ProductVM>)ViewData["OrderProductDict"];
     Dictionary<int, StoreVM> StoreDict = (Dictionary<int, StoreVM>)ViewData["OrderStoreDict"];

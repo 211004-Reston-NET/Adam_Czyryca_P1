@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    var total = new double();
+   
 }
 @model TTGWebUI.Models.ItemInOrderVM
 
@@ -70,7 +70,7 @@
                                             @for (int j = 0; j < SingletonOrderVM.ListOfLineItemsVM.ToList()[i].Quantity; j++)
                                             {
 
-                                                <option asp-for="@Model.Quantity" value=j+1>@(j+1)</option>
+                                                <option value=j+1>@(j+1)</option>
                                             }
                                         </select>
                                     </div>
@@ -121,6 +121,10 @@
                 <tr>
                     <th>Total:</th>
                     <td>@SingletonOrderVM.Total</td>
+                    <td>
+                        <button class="btn btn-primary">@Html.ActionLink("Checkout", "Checkout",null, new {style = "color: white" })</button>
+                    </td>
+                    
                 </tr>
             </table>
         </div>

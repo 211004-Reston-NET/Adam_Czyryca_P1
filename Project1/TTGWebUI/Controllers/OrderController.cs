@@ -177,8 +177,9 @@ namespace TTGWebUI.Controllers
             {
                 _itemsInOrderBL.AddItemsInOrder(item);
             }
-            //SingletonOrderVM.Order.Id;
-            return View("Index");
+            _orderBL.UpdateTotal(SingletonOrderVM.Order.Id, SingletonOrderVM.Total);
+            SingletonOrderVM.ListOfItems = new List<ItemsInOrder>();
+            return RedirectToAction(nameof(Index));
         }
 
 

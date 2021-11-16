@@ -30,7 +30,7 @@ namespace TTGDL
         /// </summary>
         /// <param name="p_orderID"></param>
         /// <param name="p_newTotal"></param>
-        void UpdateTotal(int _orderID, int _newTotal);
+        void UpdateTotal(int _orderID, double _newTotal);
 
 
 

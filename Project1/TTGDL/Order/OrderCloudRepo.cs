@@ -63,7 +63,7 @@ namespace TTGDL
             return order.Id;
         }
 
-        public void UpdateTotal(int p_orderID, int p_newTotal)
+        public void UpdateTotal(int p_orderID, double p_newTotal)
         {
             var query = _context.Orders
                 .FirstOrDefault<Orders>(ord => ord.Id == p_orderID);
