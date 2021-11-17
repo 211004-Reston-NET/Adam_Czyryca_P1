@@ -82,9 +82,7 @@ jobs:
         dotnet-version: 5.0.x
         
     - name: Publish
-      run: |
-            cd project1/TTGWebUI 
-            dotnet publish --configuration Release -o ./publish
+      run: dotnet publish project1/TTGWebUI --configuration Release -o ./publish
       
     - name: Upload sonarscanner report
       uses: actions/upload-artifact@v2
