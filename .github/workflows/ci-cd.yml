@@ -51,7 +51,7 @@ jobs:
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
           
     - name: Restore dependencies
-      run: dotnet restore WebUI/ # The filepath will differ for yours
+      run: dotnet restore TTGWebUI/ # The filepath will differ for yours
       
     - name: Test
       run: dotnet test --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
