@@ -30,3 +30,4 @@ COPY --from=build /app/publish ./
 
 CMD ["dotnet", "TTGWebUI.dll"]
 
+#docker built -t aczyryca/TTGWebUI:1.0 .

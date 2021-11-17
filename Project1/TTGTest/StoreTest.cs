@@ -39,6 +39,52 @@ namespace TTGTest
 
         }
 
+        [Fact]
+        public void GetAllCustomersTest()
+        {
+            using (var context = new database1Context(_options))
+            {
+                //arrange -- define/ set up what is needed for the Act
+                IStoreRepository repo = new StoreCloudRepo(context);
+
+                //Act -- a call to the method that is being tested 
+                List<Store> test = repo.GetAllStores();
+
+                //Assert -- expected outcome of Act
+                //Equal(number of customers expected, #of customers retrevied from GetAllCustomers)
+                Assert.Equal(2, test.Count);
+                Assert.Equal("Aquisitions Inc", test[0].Name);
+            }
+        }
+
+
+        [Fact]
+        public void AddStoreTest()
+        {
+            using (var context = new database1Context(_options))
+            {
+                //arrange -- define/ set up what is needed for the Act
+                IStoreRepository repo = new StoreCloudRepo(context);
+                Store AddedStore = new Store
+                {
+                    Name = "test store",
+                    Address = "test ave",
+           
+                };
+
+                //Act -- a call to the method that is being tested 
+                repo.AddStore(AddedStore);
+            }
+            //Assert -- expected outcome of Act
+            using (var context = new database1Context(_options))
+            {
+                Store result = context.Stores.Find(3);
+
+                Assert.NotNull(result);
+                Assert.Equal("test store", result.Name);
+            }
+        }
+
 
             private void Seed()
             {
