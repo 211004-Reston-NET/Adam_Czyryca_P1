@@ -36,8 +36,30 @@ namespace TTGBL
         /// <returns></returns>
         void UpdateQuantity(int _itemID, int _newQuantity);
 
+
+        /// <summary>
+        /// updates all items to to matched passed LineItem
+        /// </summary>
+
+        /// <param name="_item"></param>
+        void Update(LineItem _item);
+
+
+        /// <summary>
+        /// delete the LineItem with the passed Id
+        /// </summary>
+        /// <param name="_item"></param>
+        /// <returns></returns>
+        LineItem DeleteItem(LineItem _item);
         LineItem GetMatchingLineItem(int _itemID);
 
-        //Tuple<LineItem, Product> GetFullItem(LineItem _item);
+        /// <summary>
+        /// This Method will update the stock of a given LineItem (p_lineItem.LineItemId) to the quantity provided (p_lineItem.Quantity)
+        /// </summary>
+        /// /// <param name="p_lineItem"> this is the ID for the LineItem that will be updated. </param>
+        void RefreshStock(LineItem p_lineItem);
+
+
+        LineItem GetLineItemsById(int p_lineItemId);
     }
 }
