@@ -15,6 +15,7 @@
         <th class="text-center">Name</th>
         <th class="text-center">Address</th>
         <th class="text-center"></th>
+        <th></th>
     </tr>
 
     @foreach (StoreVM store in Model)
@@ -24,13 +25,16 @@
             <td class="text-center">@Html.DisplayFor(modelItem => store.Address)</td>
             <td class="text-center">
                 <div class="dropdown">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Inventory
                     </button>
                     <div class="dropdown-menu">
                         <button class="dropdown-item" type="button">@Html.ActionLink("View", "Inventory", "LineItem", new { p_storeId = store.Id }, new { @style = "color:black;" })</button>
                         <button class="dropdown-item" type="button">@Html.ActionLink("Add", "Create", "LineItem", new { p_storeId = store.Id }, new { @style = "color:black;" })</button>
                     </div>
+                    <td>
+                        <button class="btn btn-info">@Html.ActionLink("Orders", "StoreIndex","Order", new { p_storeId = store.Id }, new { @style = "color:white;" })</button>
+                    </td>
                 </div>
                 <!--
                 <button class="btn btn-info">Html.ActionLink("Inventory", "Inventory", "LineItem", new { p_storeId = store.Id }, new { style = "color:white;" })</button>

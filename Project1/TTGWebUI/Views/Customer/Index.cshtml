@@ -30,6 +30,7 @@
                 <th>Address</th>
                 <th>Email/Phone</th>
                 <th></th>
+                <th></th>
             </tr>
 
             @foreach (CustomerVM cust in Model)
@@ -47,6 +48,9 @@
                     <td>
                         <!-- ActionLink("name for given element", "what action to point to in the controller", give info from view to controller, styling)-->
                         <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { p_id = cust.Id }, new { @style = "color:white;" })</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info">@Html.ActionLink("Orders", "CustIndex","Order", new { p_id = cust.Id }, new { @style = "color:white;" })</button>
                     </td>
                 </tr>
                 }

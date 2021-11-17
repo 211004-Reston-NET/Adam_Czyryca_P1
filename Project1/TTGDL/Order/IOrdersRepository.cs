@@ -36,9 +36,9 @@ namespace TTGDL
 
 
 
+        List<Orders> GetAllCustomerOrders(int _custId);
 
-
-        
+        List<Orders> GetAllStoreOrders(int _storeId);
         int GetOrderId(Orders p_order);
 
         List<Orders> GetAllCustomerOrders(Customer _cust);

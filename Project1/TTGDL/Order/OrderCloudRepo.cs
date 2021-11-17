@@ -43,6 +43,39 @@ namespace TTGDL
             ).ToList();
         }
 
+        public List<Orders> GetAllCustomerOrders(int p_custId)
+        {
+            //method syntax
+            return _context.Orders
+            .Where(ord => ord.Customer == p_custId)
+            .Select(order =>
+                new Orders()
+                {
+                    Id = order.Id,
+                    StoreFront = order.StoreFront,
+                    Customer = order.Customer,
+                    Total = order.Total
+                }
+
+            ).ToList();
+        }
+
+        public List<Orders> GetAllStoreOrders(int p_storeId)
+        {
+            //method syntax
+            return _context.Orders
+            .Where(ord => ord.StoreFront == p_storeId)
+            .Select(order =>
+                new Orders()
+                {
+                    Id = order.Id,
+                    StoreFront = order.StoreFront,
+                    Customer = order.Customer,
+                    Total = order.Total
+                }
+
+            ).ToList();
+        }
         public Orders GetOrder(int p_orderId)
         {
             var result = _context.Orders

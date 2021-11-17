@@ -33,10 +33,12 @@ namespace TTGBL
         void UpdateTotal(int _orderID, double _newTotal);
 
 
-
+        List<Orders> GetAllCustomerOrders(int _custId);
         int GetOrderId(Orders p_order);
 
         List<Orders> GetAllCustomerOrders(Customer _cust);
+
+        List<Orders> GetAllStoreOrders(int _storeId);
     }
 
 }

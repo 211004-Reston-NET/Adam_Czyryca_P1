@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+
+    Dictionary<int, OrderVM> OrderDict = (Dictionary<int, OrderVM>)ViewData["OrderDict"];
+
+    Dictionary<int, ItemInOrderVM> ItemDict = (Dictionary<int, ItemInOrderVM>)ViewData["ItemsInOrderDict"];
+    Dictionary<int, ProductVM> ProdDict = (Dictionary<int, ProductVM>)ViewData["OrderProductDict"];
+    Dictionary<int, StoreVM> StoreDict = (Dictionary<int, StoreVM>)ViewData["OrderStoreDict"];
+    Dictionary<int, CustomerVM> CustDict = (Dictionary<int, CustomerVM>)ViewData["OrderCustDict"];
+}
+<h1>List of orders</h1>
+
+
+<br />
+<br />
+<table class="table table-dark">
+    <th></th>
+</table>
+@for (int i = 0; i < OrderDict.Count; i++)
+{
+    <table class=" table table-striped table-hover">
+        <tr>
+            <th class="text-center">Customer:</th>
+            <th class="text-center">Order Location</th>
+            <th class="text-center">Total</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td class="text-center">@CustDict[i].Name</td>
+            <td class="text-center">@StoreDict[i].Name</td>
+            <td class="text-center">$@OrderDict[i].Total.ToString("F")</td>
+        </tr>
+        <tr>
+            <table class=" table table-striped table-hover">
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Category</th>
+                    <th class="text-center">Description</th>
+                </tr>
+                @foreach (var item in ItemDict)
+                {
+                    if (i * 1000 <= item.Key && item.Key < (i + 1) * 1000)
+                    {
+                        <tr>
+                            @foreach (var prod in ProdDict)
+                            {
+                                if (prod.Key == item.Key)
+                                {
+                                    <td class="text-center">@prod.Value.Name</td>
+                                    <td class="text-center">$@prod.Value.Price.ToString("F")</td>
+                                    <td class="text-center">@item.Value.Quantity</td>
+                                    <td class="text-center">@prod.Value.Catagory</td>
+                                    <td class="text-center">@prod.Value.Description</td>
+                                }
+                            }
+                        </tr>
+                    }
+                }
+            </table>
+        </tr>
+
+    </table>
+    <table class="table table-dark">
+        <th></th>
+    </table>
+}
+
+
+
+
+
+
