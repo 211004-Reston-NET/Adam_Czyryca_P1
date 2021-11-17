@@ -66,21 +66,6 @@ jobs:
           dotnet build project1/TTGWebUI  --configuration Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}" 
     
-    
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest # Using ubuntu this time
-    environment:
-      name: 'Production' # Let's us setup an environment named publish and you can see it in my repository
-      
-    steps:
-    #Sets our SDK again
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
-        
     - name: Publish
       run: |
             cd project1/TTGWebUI 
