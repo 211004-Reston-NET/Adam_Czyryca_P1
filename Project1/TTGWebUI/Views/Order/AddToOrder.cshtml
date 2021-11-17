@@ -19,6 +19,7 @@
                 </tr>
                 <tr></tr>
                 <tr>
+
                     @for (int i = 0; i < SingletonOrderVM.ListOfProductsVM.Count; i++)
                     {
                         <table class="table table-dark w-100">
@@ -65,14 +66,20 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Quantity:</span>
                                         </div>
-                                        <select asp-for="@Model.Quantity" class="custom-select" id="inputGroupSelect01">
+                                        
+                                        @*<input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber" />*@
+
+                                        @*<label asp-for="Quantity" class="form-label">Name</label>*@
+                                        <input asp-for="Quantity" type="number" min="0" step="1" max="@SingletonOrderVM.ListOfLineItemsVM.ToList()[i].Quantity" class="form-control"/>
+
+                                        @*<select asp-for="@Model.Quantity" class="custom-select" id="inputGroupSelect01">
                                             <option selected>Choose Quantity...</option>
                                             @for (int j = 0; j < SingletonOrderVM.ListOfLineItemsVM.ToList()[i].Quantity; j++)
                                             {
 
                                                 <option value=j+1>@(j+1)</option>
                                             }
-                                        </select>
+                                        </select>*@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <div class="input-group-prepend">
@@ -120,9 +127,9 @@
                  }
                 <tr>
                     <th>Total:</th>
-                    <td>@SingletonOrderVM.Total</td>
+                    <td>@SingletonOrderVM.Total.ToString("F")</td>
                     <td>
-                        <button class="btn btn-primary">@Html.ActionLink("Checkout", "Checkout",null, new {style = "color: white" })</button>
+                        <button class="btn btn-primary">@Html.ActionLink("Checkout", "Checkout",null, new {@style = "color: white" })</button>
                     </td>
                     
                 </tr>

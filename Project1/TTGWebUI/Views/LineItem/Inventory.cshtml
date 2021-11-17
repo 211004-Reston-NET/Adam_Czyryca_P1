@@ -23,22 +23,23 @@
 
     </tr>
 
-    @for(int i=0; i < Model.Item1.ToList().Count; i++)
-     {
-     <tr>
-        <td>@Html.DisplayFor(modelitem => Model.Item1.ToList()[i].Name)</td>
-        <td>@Html.DisplayFor(modelitem => Model.Item1.ToList()[i].Price)</td>
-        <td>@Html.DisplayFor(modelitem => Model.Item2.ToList()[i].Quantity)</td>
-        <td>@Html.DisplayFor(modelitem => Model.Item1.ToList()[i].Catagory)</td>
-        <td>@Html.DisplayFor(modelitem => Model.Item1.ToList()[i].Description)</td>
-        <td>
-            <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { p_id = Model.Item2.ToList()[i].Id }, new { @style = "color:white;" })</button>
-        </td>
-        <td>
-            <button class="btn btn-info">@Html.ActionLink("Modify", "Modify", new { p_id = Model.Item2.ToList()[i].Id }, new { @style = "color:white;" })</button>
-        </td>
+    @for (int i = 0; i < Model.Item1.ToList().Count; i++)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelitem => Model.Item1.ToList()[i].Name)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Item1.ToList()[i].Price)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Item2.ToList()[i].Quantity)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Item1.ToList()[i].Catagory)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Item1.ToList()[i].Description)</td>
+            <td>
+                <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { p_id = Model.Item2.ToList()[i].Id }, new { @style = "color:white;" })</button>
+            </td>
+            <td>
+                <button class="btn btn-secondary">@Html.ActionLink("Edit Stock", "Edit", new { p_id = Model.Item2.ToList()[i].Id }, new { @style = "color: white;" })</button>
+                @*<button class="btn btn-info">@Html.ActionLink("Update Stock", "Modify", new { p_id = Model.Item2.ToList()[i].Id }, new { @style = "color:white;" })</button>*@
+            </td>
 
-    </tr>
-     }
+        </tr>
+    }
 
 </table>

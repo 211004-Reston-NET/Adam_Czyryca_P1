@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+
+    ProductVM prod = (ProductVM)ViewData["prodInLineItem2"];
+}
+@model TTGWebUI.Models.LineItemVM
+
+
+<h1 class="display-5">Modify an Item</h1>
+
+
+<h1>Edit Stock</h1>
+<form asp-action="Edit">
+
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="mb-3">
+        <label asp-for="Quantity" class="form-label">Quantity:</label>
+        <input asp-for="Quantity" type="text" class="form-control">
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-primary" value="Edit">Submit</button>
+</form>
+
+<!--<form asp-action="Modify">-->
+@*<div class="mb-3">
+        <label asp-for="Store" class="form-label">Storefront ID</label>
+        <input asp-for="Store" type="text" class="form-control" />
+
+    </div>*@
+
+<!--<div class="mb-3">
+        <label asp-for="Quantity" class="form-label">Quantity</label>
+        <input asp-for="Quantity" type="text" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <input class="form-control" type="text" placeholder="SingletonProductVM.product.Name.ToString()" readonly>
+        <input type="hidden" asp-for=Product value=SingletonProductVM.product.Id />
+    </div>
+    <input type="hidden" asp-for="Store" />
+    <input type="submit" value="Update" class="btn btn-primary"/>
+
+</form>-->

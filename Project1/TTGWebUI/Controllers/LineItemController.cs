@@ -40,9 +40,9 @@ namespace WebUI.Controllers
         {
             ViewData.Add("CurrentStoreFront", p_storeId);
             List<LineItem> ListOfLineItems = _lineItemBL.GetAllLineItems(p_storeId);
-            List<ProductVM> ProdList=new List<ProductVM>();
+            List<ProductVM> ProdList = new List<ProductVM>();
             List<LineItemVM> ItemList = new List<LineItemVM>();
-            for (int i=0; i< ListOfLineItems.Count; i++)
+            for (int i = 0; i < ListOfLineItems.Count; i++)
             {
                 ProdList.Add(new ProductVM(_prodBL.GetProductByID(ListOfLineItems[i].Product)));
                 ItemList.Add(new LineItemVM(ListOfLineItems[i]));
@@ -56,7 +56,7 @@ namespace WebUI.Controllers
         [HttpGet]
         public ActionResult Create(int p_storeId)
         {
-            return View(new LineItemVM(){Store = p_storeId});
+            return View(new LineItemVM() { Store = p_storeId });
         }
 
         // POST: CustomerController/Create
@@ -66,7 +66,7 @@ namespace WebUI.Controllers
         {
             Product foundProd = _prodBL.GetProductByID(LItemVM.Product);
             Store foundStore = _storeBL.GetStoreById(LItemVM.Store);
-            if (foundStore!= null)
+            if (foundStore != null)
             {
                 _lineItemBL.AddLineItem(new LineItem()
                 {
@@ -77,17 +77,129 @@ namespace WebUI.Controllers
                 });
             }
 
-            return RedirectToAction(nameof(Inventory));
+            return RedirectToAction("Index", "Store");
         }
 
         //-----------------------------------Delete------------------------------------------
+        public ActionResult Delete(int p_Id)
+        {
+            LineItem LItem = _lineItemBL.GetMatchingLineItem(p_Id);
+            Product prod = _prodBL.GetProductByID(LItem.Product);
+          
+            ProductVM prodVM = new ProductVM(prod);
+            ViewData.Add("prodInLineItem", prodVM);
+            return View(new LineItemVM(_lineItemBL.GetMatchingLineItem(p_Id)));
+        }
 
+        // POST: CustomerController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int Id, IFormCollection collection)
+        {
+
+
+            try
+            {
+                List<LineItem> ListOfItems = _lineItemBL.GetAllLineItems();
+                foreach (LineItem item in ListOfItems)
+                {
+                    if (item.Id == Id)
+                    {
+                        _lineItemBL.DeleteItem(item);
+                    }
+                }
+                return RedirectToAction("Index", "Store");
+
+                //Customer CustToBeDeleted = _custBL.GetMatchingCustomer(Id);
+                //_custBL.DeleteCustomer(CustToBeDeleted);
+                //return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                //return RedirectToAction(nameof(Index));
+                return View();
+            }
+        
+        }
 
         //-----------------------------------Modify------------------------------------------
+        [HttpGet]
+        public ActionResult Modify(int p_Id)
+        {
+            LineItem LItem = _lineItemBL.GetMatchingLineItem(p_Id);
+            Product prod = _prodBL.GetProductByID(LItem.Product);
+            SingletonProductVM.product = prod;
+            //ProductVM prodVM = new ProductVM(prod);
+            //ViewData.Add("prodInLineItem2", prodVM);
+            return View(new LineItemVM(_lineItemBL.GetMatchingLineItem(p_Id)));
+            //return View(new LineItemVM() { Store = p_storeId });
+        }
+
+        // POST: CustomerController/Create
+        [HttpPost]
+        //[Route("/LineItem/Create?{p_storeId=2}")]
+        public ActionResult Modify(int Id, LineItemVM LItemVM)
+        {
+            try
+            {
+                List<LineItem> ListOfItems = _lineItemBL.GetAllLineItems();
+     
+
+                foreach (LineItem item in ListOfItems)
+                {
+                    if (item.Id == Id)
+                    {
+                        _lineItemBL.UpdateQuantity(Id,LItemVM.Quantity);
+                        return RedirectToAction("Index", "Store");
+                    }
+                }
+                return View();
+
+                //Customer CustToBeDeleted = _custBL.GetMatchingCustomer(Id);
+                //_custBL.DeleteCustomer(CustToBeDeleted);
+                //return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                //return RedirectToAction(nameof(Index));
+                return View();
+            }
+ 
+        }
+        //------------------------------------------------------------------------------------------------------
+        // GET: LineItem/Edit/5
+        public ActionResult Edit(int p_id)
+        {
+            LineItem itemFound = _lineItemBL.GetLineItemsById(p_id);
+            return View(new LineItemVM(itemFound));
+        }
+
+        // POST: LineItem/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(LineItemVM p_lineItemVM, int LineItemId)
+        {
+            try
+            {
+                LineItem itemToUpdate = _lineItemBL.GetLineItemsById(LineItemId);
+                itemToUpdate.Quantity = p_lineItemVM.Quantity;
+                _lineItemBL.RefreshStock(itemToUpdate);
+                return RedirectToAction("Index", new
+                {
+                    p_storeId = itemToUpdate.Store
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return View();
+            }
+        }
 
 
 
         //------------------------------------------------------------------------------
+
 
     }
 }

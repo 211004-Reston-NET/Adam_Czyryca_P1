@@ -163,7 +163,7 @@ namespace TTGWebUI.Controllers
                 }
 
             }
-            SingletonOrderVM.Total = (NewProduct.Price * item.Quantity);
+            SingletonOrderVM.Total += (NewProduct.Price * item.Quantity);
 
 
 

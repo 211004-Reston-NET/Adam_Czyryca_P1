@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using TTGModel;
 
 
@@ -70,6 +71,7 @@ namespace TTGDL
         public LineItem GetMatchingLineItem(int p_itemID)
         {
             var result = _context.LineItems
+                .AsNoTracking()
                 .FirstOrDefault<LineItem>(item =>
                     item.Id == p_itemID);
             return new LineItem()
@@ -96,5 +98,45 @@ namespace TTGDL
             query.Quantity = p_newQuantity;
             _context.SaveChanges();
         }
+
+        public void Update( LineItem p_item)
+        {
+            _context.LineItems.Update(p_item);
+            _context.SaveChanges();
+        }
+
+        public LineItem DeleteItem(LineItem p_item)
+        {
+            _context.LineItems.Remove(p_item);
+            _context.SaveChanges();
+            return p_item;
+        }
+
+
+        public void RefreshStock(LineItem p_lineItem)
+        {
+            _context.LineItems.Update(p_lineItem);
+            _context.SaveChanges();
+        }
+
+        //------------------------------------------------------
+        public LineItem GetLineItemsById(int p_lineItemId)
+        {
+            return _context.LineItems
+                            .AsNoTracking()
+                            .Select(item =>
+                            new LineItem()
+                            {
+                                Id = item.Id,
+                                Quantity = item.Quantity,
+                                Product = item.Product,
+                                Store = item.Store
+                            })
+                        .ToList()
+
+                        .FirstOrDefault(item => item.Id == p_lineItemId);
+        }
+
+        //------------------------------------------------------
     }
 }

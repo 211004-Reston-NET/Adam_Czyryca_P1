@@ -26,5 +26,26 @@ namespace TTGWebUI.Controllers
                 .ToList()
             );
         }
+
+
+        //-------------------------------------Create----------------------------------------
+        // GET: CustomerController/Create
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: CustomerController/Create
+        [HttpPost]
+        public IActionResult Create(StoreVM storeVM)
+        {
+            _storeBL.AddStore(new Store()
+            {
+                Name = storeVM.Name,
+                Address= storeVM.Address
+            });
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
