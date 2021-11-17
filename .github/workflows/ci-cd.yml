@@ -51,7 +51,7 @@ jobs:
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
           
     - name: Restore dependencies
-      run: dotnet restore project1 # The filepath will differ for yours
+      run: dotnet restore project1/TTGWebUI # The filepath will differ for yours
       
     - name: Test
       run: dotnet test --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
@@ -63,23 +63,23 @@ jobs:
       shell: powershell
       run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"211004-Reston-NET_Colin-Mudie-P1" /o:"211004-reston-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.exclusions="**WebUI/wwwroot/lib/**" /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.vs.vstest.reportsPaths="**/TestResult/*trx"
-          dotnet build WebUI/ --configuration Release
+          dotnet build project1/TTGWebUI  --configuration Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}" 
     
     - name: Publish
       run: |
-            cd TTGWebUI/
+            cd project1/TTGWebUI 
             dotnet publish --configuration Release -o ./publish
       
     - name: Upload sonarscanner report
       uses: actions/upload-artifact@v2
       with:
         name: TTGWebUI
-        path: ./TTGWebUI/publish
+        path: ./project1/TTGWebUI/publish
     
     - name: Deploy
       uses: azure/webapps-deploy@v2
       with:
         app-name: Table-Top-Games # Replace this with your web app name
         publish-profile: ${{secrets.AZURE_WEBAPP_PUBLISH}}
-        package: ./TTGWebUI/publish
+        package: ./project1/TTGWebUI/publish
