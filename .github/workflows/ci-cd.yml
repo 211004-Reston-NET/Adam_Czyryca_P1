@@ -75,7 +75,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: TTGWebUI
-        path: ./WebUI/publish
+        path: ./TTGWebUI/publish
     
     - name: Deploy
       uses: azure/webapps-deploy@v2
