@@ -54,7 +54,7 @@ jobs:
       run: dotnet restore project1/TTGWebUI # The filepath will differ for yours
       
     - name: Test
-      run: dotnet test --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+      run: dotnet test project1/TTGWebUI --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
       
     - name: Build and analyze
       env:
