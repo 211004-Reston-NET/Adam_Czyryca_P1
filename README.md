@@ -37,8 +37,8 @@
   Edit Customer info
   
 ## To-do list:
- update inventory item quantity
-  this workes via placing an order upon prchesing an item the quantity is updated accordingly
+ update quantity via inventory 
+  this workes when placing an order: upon purchasing an item the quantity is updated accordingly
   however, when trying to select an inventory item this does not fuction correctly 
 
 ## App deployed at:
